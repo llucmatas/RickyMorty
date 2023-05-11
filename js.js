@@ -61,4 +61,3 @@ function handleLocalitzacionsClick() {
   
   const localitzacionsBtn = document.getElementById("localitzacions-btn");
   localitzacionsBtn.addEventListener("click", handleLocalitzacionsClick);
-  
