@@ -48,9 +48,11 @@ async function handleLocalitzacionsClick() {
         let residentsHTML = "";
 
         if (residents.length > 0) {
-            residents.forEach(resident => {
+            for (const residenturl of residents) {
+                const response = await fetch(residenturl);
+                const resident = await response.json();
                 residentsHTML += `<li>${resident.name}</li>`;
-            });
+            }
         } else {
             residentsHTML = "<li>No hi ha residents enregistrats</li>";
         }
