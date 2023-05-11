@@ -61,6 +61,7 @@ async function handleLocalitzacionsClick() {
     } else {
         console.log("ID de la localització no vàlid");
     }
+
 }
 
 const localitzacionsBtn = document.getElementById("localitzacions-btn");
