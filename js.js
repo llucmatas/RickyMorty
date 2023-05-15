@@ -1,4 +1,7 @@
 const tableContent = document.querySelector(".table-content");
+async function getCharacters(page) {
+
+}
 async function getPersonatje(characterId) {
     const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
     return await response.json();
@@ -11,6 +14,30 @@ async function getLocalitzacio(locationId) {
 
 // Funció per gestionar el clic al botó "Personatges"
 async function handlePersonatgesClick() {
+    tableContent.innerHTML = "";
+
+    // Creating table content
+    const tableHeader = document.createElement("thead");
+    const tableRow = document.createElement("tr");
+    const name = document.createElement("th");
+    const status = document.createElement("th");
+    const species = document.createElement("th");
+    const gender = document.createElement("th");
+
+    // Setting header content
+    name.textContent = 'name';
+    status.textContent = 'status';
+    species.textContent = 'species';
+    gender.textContent = 'gender';
+
+    // Adding content to table
+    tableRow.appendChild(name);
+    tableRow.appendChild(status);
+    tableRow.appendChild(species);
+    tableRow.appendChild(gender);
+    tableHeader.appendChild(tableRow);
+    tableContent.appendChild(tableHeader);
+
     const characterId = prompt("Introdueix l'ID del personatge:");
 
     if (characterId !== null && characterId.trim() !== "") {
