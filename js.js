@@ -1,3 +1,4 @@
+const tableContent = document.querySelector(".table-content");
 async function getPersonatje(characterId) {
     const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
     return await response.json();
