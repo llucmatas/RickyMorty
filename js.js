@@ -25,6 +25,11 @@ async function handlePersonatgesClick() {
 </thead>
     `;
 
+    const response = await fetch('https://rickandmortyapi.com/api/character');
+    const data = response.json();
+
+    console.log(data.results);
+
     const characterId = prompt("Introdueix l'ID del personatge:");
 
     if (characterId !== null && characterId.trim() !== "") {
