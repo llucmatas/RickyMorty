@@ -14,29 +14,16 @@ async function getLocalitzacio(locationId) {
 
 // Funció per gestionar el clic al botó "Personatges"
 async function handlePersonatgesClick() {
-    tableContent.innerHTML = "";
-
-    // Creating table content
-    const tableHeader = document.createElement("thead");
-    const tableRow = document.createElement("tr");
-    const name = document.createElement("th");
-    const status = document.createElement("th");
-    const species = document.createElement("th");
-    const gender = document.createElement("th");
-
-    // Setting header content
-    name.textContent = 'name';
-    status.textContent = 'status';
-    species.textContent = 'species';
-    gender.textContent = 'gender';
-
-    // Adding content to table
-    tableRow.appendChild(name);
-    tableRow.appendChild(status);
-    tableRow.appendChild(species);
-    tableRow.appendChild(gender);
-    tableHeader.appendChild(tableRow);
-    tableContent.appendChild(tableHeader);
+    tableContent.innerHTML = `
+<thead>
+  <tr>
+    <th>name</th>
+    <th>status</th>
+    <th>species</th>
+    <th>gender</th>
+  </tr>
+</thead>
+    `;
 
     const characterId = prompt("Introdueix l'ID del personatge:");
 
