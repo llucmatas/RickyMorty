@@ -34,6 +34,15 @@ personatgesBtn.addEventListener("click", handlePersonatgesClick);
 
 // Funció per gestionar el clic al botó "Localitzacions"
 async function handleLocalitzacionsClick() {
+    tableContent.innerHTML=`
+    <thead>
+    <tr>
+      <th>name</th>
+      <th>type</th>
+      <th>dimension</th>
+    </tr>
+  </thead>`;
+
     const locationId = prompt("Introdueix l'ID de la localització:");
 
     if (locationId !== null && locationId.trim() !== "") {
