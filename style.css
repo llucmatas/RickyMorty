@@ -25,7 +25,7 @@ body {
     background-color: #45a049;
   }
   
-  .character-info {
+  /* .character-info {
     display: flex;
     align-items: flex-start;
     margin-top: 20px;
@@ -48,13 +48,17 @@ body {
     height: auto;
     display: block;
     border-radius: 4px;
-  }
+  } */
   
   .titol {
     text-align: center;
   }
 
   .imatge{
-    max-width: 75%;
+    max-width: 50%;
     height: auto;
+  }
+  table{
+    padding-top: 20px;
+    margin: 0 auto;
   }
