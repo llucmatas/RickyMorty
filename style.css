@@ -6,7 +6,7 @@ body {
   .menu {
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 45px;
   }
   
   .menu button {
@@ -50,3 +50,11 @@ body {
     border-radius: 4px;
   }
   
+  .titol {
+    text-align: center;
+  }
+
+  .imatge{
+    max-width: 75%;
+    height: auto;
+  }
