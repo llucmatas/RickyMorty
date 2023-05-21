@@ -5,15 +5,15 @@ const tableContent = document.querySelector(".table-content");
 async function getCharacters(page) {
 
 }
-// async function getPersonatje(characterId) {
-//     const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
-//     return await response.json();
-// }
+async function getPersonatje(characterId) {
+    const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
+    return await response.json();
+}
 
-// async function getLocalitzacio(locationId) {
-//     const response = await fetch(`https://rickandmortyapi.com/api/location/${locationId}`)
-//     return await response.json();
-// }
+async function getLocalitzacio(locationId) {
+    const response = await fetch(`https://rickandmortyapi.com/api/location/${locationId}`)
+    return await response.json();
+}
 
 // Funció per gestionar el clic al botó "Personatges"
 async function handlePersonatgesClick() {
@@ -38,6 +38,7 @@ async function fetchLocation(page) {
       <th>Nom</th>
       <th>Tipus</th>
       <th>Dimensió</th>
+      <th>Accions</th>
     </tr>
   </thead>`;
 
@@ -53,6 +54,7 @@ async function fetchLocation(page) {
         const name = document.createElement("td")
         const type = document.createElement("td")
         const dimension = document.createElement("td")
+
         name.textContent = result.name;
         type.textContent = result.type;
         dimension.textContent = result.dimension;
@@ -60,39 +62,45 @@ async function fetchLocation(page) {
         row.appendChild(type);
         row.appendChild(dimension);
 
+        const showButton = document.createElement('button');
+        showButton.textContent = 'Mostrar detalls';
+        showButton.addEventListener('click', () => {
+            showLocation(result.id);
+        });
+        row.appendChild(showButton);
+
         tbody.appendChild(row);
     }
     tableContent.appendChild(tbody);
+}
 
+async function showLocation(locationId) {
+    if (locationId !== null) {
+        const location = await getLocalitzacio(locationId);
+        const residentsList = document.getElementById("residents-list");
+        const locationName = document.getElementById("location-name");
+        const locationType = document.getElementById("location-type");
 
-    //     const locationId = prompt("Introdueix l'ID de la localització:");
+        locationName.textContent = location.name;
+        locationType.textContent = location.type;
 
-    //     if (locationId !== null && locationId.trim() !== "") {
-    //         const location = await getLocalitzacio(locationId);
-    //         const residentsList = document.getElementById("residents-list");
-    //         const locationName = document.getElementById("location-name");
-    //         const locationType = document.getElementById("location-type");
+        const residents = location.residents;
+        let residentsHTML = "";
 
-    //         locationName.textContent = location.name;
-    //         locationType.textContent = location.type;
+        if (residents.length > 0) {
+            for (const residenturl of residents) {
+                const response = await fetch(residenturl);
+                const resident = await response.json();
+                residentsHTML += `<li>${resident.name}</li>`;
+            }
+        } else {
+            residentsHTML = "<li>No hi ha residents enregistrats</li>";
+        }
 
-    //         const residents = location.residents;
-    //         let residentsHTML = "";
-
-    //         if (residents.length > 0) {
-    //             for (const residenturl of residents) {
-    //                 const response = await fetch(residenturl);
-    //                 const resident = await response.json();
-    //                 residentsHTML += `<li>${resident.name}</li>`;
-    //             }
-    //         } else {
-    //             residentsHTML = "<li>No hi ha residents enregistrats</li>";
-    //         }
-
-    //         residentsList.innerHTML = residentsHTML;
-    //     } else {
-    //         console.log("ID de la localització no vàlid");
-    //     }
+        residentsList.innerHTML = residentsHTML;
+    } else {
+        console.log("ID de la localització no vàlid");
+    }
 }
 
 async function fetchCharacters(page) {
@@ -103,6 +111,7 @@ async function fetchCharacters(page) {
     <th>Estat</th>
     <th>Especie</th>
     <th>Genere</th>
+    <th>Accions</th>
   </tr>
 </thead>
     `;
@@ -123,30 +132,41 @@ async function fetchCharacters(page) {
         status.textContent = result.status;
         species.textContent = result.species;
         gender.textContent = result.gender;
+
+
         row.appendChild(name);
         row.appendChild(status);
         row.appendChild(species);
         row.appendChild(gender)
 
+        const showButton = document.createElement('button');
+        showButton.textContent = 'Mostrar detalls';
+        showButton.addEventListener('click', () => {
+            showCharacter(result.id);
+        });
+        row.appendChild(showButton);
+
         tbody.appendChild(row);
     }
     tableContent.appendChild(tbody);
-    //     const characterId = prompt("Introdueix l'ID del personatge:");
+}
 
-    //     if (characterId !== null && characterId.trim() !== "") {
-    //         const character = await getPersonatje(characterId)
-    //         const characterName = document.getElementById("character-name");
-    //         const characterStatus = document.getElementById("character-status");
-    //         const characterSpecies = document.getElementById("character-species");
-    //         const characterImage = document.getElementById("character-image");
+async function showCharacter(characterId) {
 
-    //         characterName.textContent = character.name;
-    //         characterStatus.textContent = character.status;
-    //         characterSpecies.textContent = character.species;
-    //         characterImage.innerHTML = `<img src="${character.image}" alt="${character.name}">`;
-    //     } else {
-    //         console.log("ID del personatge no vàlid");
-    //     }
+    if (characterId !== null) {
+        const character = await getPersonatje(characterId)
+        const characterName = document.getElementById("character-name");
+        const characterStatus = document.getElementById("character-status");
+        const characterSpecies = document.getElementById("character-species");
+        const characterImage = document.getElementById("character-image");
+
+        characterName.textContent = character.name;
+        characterStatus.textContent = character.status;
+        characterSpecies.textContent = character.species;
+        characterImage.innerHTML = `<img src="${character.image}" alt="${character.name}">`;
+    } else {
+        console.log("ID del personatge no vàlid");
+    }
 }
 
 const localitzacionsBtn = document.getElementById("localitzacions-btn");
